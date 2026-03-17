@@ -46,22 +46,10 @@ $deleteanypost = has_capability('local/greetings:deleteanymessage', $context);
 $action = optional_param('action', '', PARAM_TEXT);
 
 if ($action == 'del') {
-    require_sesskey();
+    $id = required_param('id', PARAM_INT);
 
-    $id = required_param('id', PARAM_TEXT);
-
-    if ($deleteanypost || $deletepost) {
-        $params = array('id' => $id);
-
-        // Users without permission should only delete their own post.
-        if(!$deleteanypost) {
-            $params += ['userid' => $USER->id];
-        }
-
-        // TODO: Confirm before deleting.
-        $DB->delete_records('local_greetings_messages', $params);
-
-        redirect($PAGE->url);
+    if ($deleteanypost) {
+        $DB->delete_records('local_greetings_messages', ['id' => $id]);
     }
 }
 
@@ -134,6 +122,10 @@ if (has_capability('local/greetings:viewmessages', $context)) {
     }
 
     echo $OUTPUT->box_end();
+}
+
+if (isguestuser()) {
+    throw new moodle_exception('noguest');
 }
 
 echo $OUTPUT->footer();
