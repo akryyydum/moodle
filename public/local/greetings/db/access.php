@@ -15,41 +15,44 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Capabilities for Greetings plugin.
+ *
+ * @package     local_greetings
  * @copyright  2022 Rajneel Totatam
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$capabilities = array(
-    'local/greetings:postmessages' => array(
+$capabilities = [
+    'local/greetings:postmessages' => [
         'riskbitmask' => RISK_SPAM,
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => array(
+        'archetypes' => [
             'user' => CAP_ALLOW,
-        )
-    ),
-    'local/greetings:viewmessages' => array(
+        ],
+    ],
+    'local/greetings:viewmessages' => [
         'captype' => 'read',
         'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => array(
+        'archetypes' => [
             'user' => CAP_ALLOW,
-        )
-    ),
-    'local/greetings:deleteownmessage' => array(
+        ],
+    ],
+    'local/greetings:deleteownmessage' => [
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => array(
+        'archetypes' => [
             'user' => CAP_ALLOW,
-        )
-    ),
-    'local/greetings:deleteanymessage' => array(
+        ],
+    ],
+    'local/greetings:deleteanymessage' => [
         'riskbitmask' => RISK_DATALOSS,
         'captype' => 'write',
         'contextlevel' => CONTEXT_SYSTEM,
-        'archetypes' => array(
+        'archetypes' => [
             'manager' => CAP_ALLOW,
-        )
-    ),
-);
+        ],
+    ],
+];
